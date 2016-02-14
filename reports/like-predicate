@@ -1,0 +1,8 @@
+Wildcards explanation
+
+Search for movie by
+Title: %title%. All strings that contain the pattern 'title' will be filtered out.
+Year: no wildcard. 
+Director: %director%. All strings that contain the pattern 'director' will be filtered out.
+Star's First Name: %firstname%. All strings that contain the pattern 'firstname' will be filtered out.
+Star's Last Name: %lastname%. All strings that contain the pattern 'lastname' will be filtered out.

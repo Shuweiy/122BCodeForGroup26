@@ -1,0 +1,8 @@
+// Use http GET         
+public void doGet(HttpServletRequest    request,  HttpServletResponse    response)
+                         throws  IOException, ServletException                            {
+                                  // Output stream to STDOUT
+                                  PrintWriter    out = response.getWriter();
+                                  out.println(SignatureReader.getSignature("/var/lib/tomcat7/webapps/fabflix/"));
+                                  out.close();
+                         }
