@@ -127,7 +127,7 @@
 				<div class="col-lg-6" style = "text-align:center">
 					<h3>Title</h3>
 					<p>
-						<a href="/fabflix/servlet/BroswerController?input=Q"/>Q</a>
+<a href="/fabflix/servlet/Broswer?input=Q"/>Q</a>
 <a href="/fabflix/servlet/Broswer?input=W"/>W</a>
 <a href="/fabflix/servlet/Broswer?input=E"/>E</a> 
 <a href="/fabflix/servlet/Broswer?input=R"/>R</a> 
