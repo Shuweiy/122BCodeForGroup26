@@ -87,13 +87,12 @@
 
 
     <% ArrayList<Integer> Movielist = (ArrayList<Integer>) session.getAttribute("Movielist");
-            Integer PageNo = (Integer) session.getAttribute("PageNo");
-            Integer display = (Integer) session.getAttribute("display");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection =
-            DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb", "root", "");
+        Integer PageNo = (Integer) session.getAttribute("PageNo");
+        Integer display = (Integer) session.getAttribute("display");
+        Class.forName("com.mysql.jdbc.Driver").newInstance();           
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb", "root", "");
 
-             ArrayList<Integer>  movie_id_list = new ArrayList<Integer>();   
+        ArrayList<Integer>  movie_id_list = new ArrayList<Integer>();   
 
             if((Movielist.size()-display*PageNo)>= display){
 

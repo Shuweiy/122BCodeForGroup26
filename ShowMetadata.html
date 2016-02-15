@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Fabflix Employee Page Show Metadata</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,14 +51,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="index.html">Fabflix Employee Page</a>
             </div>
             <!-- /.navbar-header -->
 
+            <ul class="nav navbar-top-links navbar-right">
+
                 <!-- /.dropdown -->
-               
-  
-                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="_dashboard.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+
+                </li>
+
+            </ul>
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
@@ -75,19 +91,19 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+    
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Metadata</a>
-                        </li>
-
-                        
+                            <a href="ShowMetadata.html"><i class="fa fa-table fa-fw"></i>Show Metadata</a>
+                        </li>                        
+                
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Modify Database <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="InsertStar.html">Insert Star</a>
+                                    <a href="InsertStar.html">Insert a Star</a>
                                 </li>
                                 <li>
-                                    <a href="AddMovie.html">Add Movie</a>
+                                    <a href="InsertMovie.html">Insert a Movie</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -102,7 +118,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
+                    <h1 class="page-header">Show Metadata</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
