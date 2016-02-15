@@ -107,10 +107,10 @@
 			  </div><!-- /.col-lg-6 -->
 
 			<div class="col-lg-12" style = "text-align:center">
-				<h3>Broswer Movie</h3>
+				<h3>Browser Movie</h3>
 
 				<div class="col-lg-6" style = "text-align:center">
-					<h3>Genra</h3>
+					<h3>Genre</h3>
 
 <a href="/fabflix/servlet/Broswer?input=action"/>action</a> 
 <a href="/fabflix/servlet/Broswer?input=adventure"/>adventure</a> 
