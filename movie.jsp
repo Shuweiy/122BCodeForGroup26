@@ -55,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                  <%out.write("<a class='navbar-brand'  href='/fabflix/servlet/Shopping?item="+movie_id+"'>Purchease</a>");%>            </div>
+                  <%out.write("<a class='navbar-brand'  href='/fabflix/servlet/Shopping?item="+movie_id+"'>Purchase</a>");%>            </div>
 <!--                 <a class="navbar-brand" href="#">Start Bootstrap</a>
  -->            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
