@@ -99,7 +99,7 @@
                                                     <br>
 
 
-                            <button type="submit" class="btn btn-default" type="button">Search Moive</button>
+                            <button type="submit" class="btn btn-default" type="button">Search Movie</button>
     			    </div><!-- /input-group -->
 
 			    </form>  
