@@ -17,23 +17,16 @@ public class ShoppingController extends HttpServlet {
     if(action != null){
       if(action.equals("check")){
       request.getRequestDispatcher("/ShoppingCart.jsp").forward(request, response);
-<<<<<<< HEAD
-      }
-=======
       return;  
     }
->>>>>>> 4070c9181e8e2508277ecf61dcb6c5e24c5e3606
+
       if(action.equals("remove")){
         String item_id = request.getParameter("item_id");
         previousItems.remove(item_id);
         session.setAttribute("previousItems", previousItems);
         request.getRequestDispatcher("/ShoppingCart.jsp").forward(request, response);
-<<<<<<< HEAD
-      }
-=======
 	return;      
-}
->>>>>>> 4070c9181e8e2508277ecf61dcb6c5e24c5e3606
+  }
      } 
     synchronized(session) {
       if (previousItems == null) {

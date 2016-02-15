@@ -27,10 +27,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<<<<<<< HEAD
     <script src='https://www.google.com/recaptcha/api.js'></script>
-=======
->>>>>>> 4070c9181e8e2508277ecf61dcb6c5e24c5e3606
 
 </head>
 
