@@ -112,13 +112,13 @@
 				<div class="col-lg-6" style = "text-align:center">
 					<h3>Genre</h3>
 
-<a href="/fabflix/servlet/Broswer?input=action"/>action</a> 
-<a href="/fabflix/servlet/Broswer?input=adventure"/>adventure</a> 
-<a href="/fabflix/servlet/Broswer?input=comedy"/>comedy</a> 
-<a href="/fabflix/servlet/Broswer?input=crime"/>crime</a> 
-<a href="/fabflix/servlet/Broswer?input=drama"/>drama</a> 
-<a href="/fabflix/servlet/Broswer?input=horror"/>horror</a> 
-<a href="/fabflix/servlet/Broswer?input=drama"/>drama</a>
+<a href="/fabflix/servlet/Broswer?genre=action"/>action</a> 
+<a href="/fabflix/servlet/Broswer?genre=adventure"/>adventure</a> 
+<a href="/fabflix/servlet/Broswer?genre=comedy"/>comedy</a> 
+<a href="/fabflix/servlet/Broswer?genre=crime"/>crime</a> 
+<a href="/fabflix/servlet/Broswer?genre=drama"/>drama</a> 
+<a href="/fabflix/servlet/Broswer?genre=horror"/>horror</a> 
+<a href="/fabflix/servlet/Broswer?genre=drama"/>drama</a>
 
 				</div>
 

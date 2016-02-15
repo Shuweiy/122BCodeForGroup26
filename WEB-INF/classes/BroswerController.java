@@ -36,11 +36,11 @@ public class BroswerController extends HttpServlet
         String loginPasswd = "";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
 
-
         response.setContentType("text/html");    // Response mime type
 
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         
         try
            {
@@ -56,14 +56,22 @@ public class BroswerController extends HttpServlet
 
               JDBC jdbc = new JDBC(action1,action2,action3);
 
-
-
               String input = request.getParameter("input");
-              
-            
+              String genre = request.getParameter("genre");
               
               ArrayList<Integer> movie_ids = new ArrayList();
 
+              if(input!="")
+              {
+                movie_ids = GetMovieIDsByTitleFirstChar(input, action1);
+              }
+
+              if(genre!="")
+              {
+                movie_ids = GetMovieIDsByGenre(genre, action1);
+              }
+
+              /*
                if(input.length()>1){
 
                ResultSet result = action1.executeQuery("SELECT id FROM movies WHERE title LIKE'"+input+"%';");
@@ -80,17 +88,16 @@ public class BroswerController extends HttpServlet
                         
                movieL = jdbc.GetMovieIDsByTitleFirstChar(input);
 
-
               }
 
-              HttpSession session = request.getSession();
-
+              */
 
               action1.close();
               dbcon.close();
+
               session.setAttribute("PageNo", 0);
               session.setAttribute("display", 10);
-              session.setAttribute("Movielist", movieL);
+              session.setAttribute("Movielist", movie_ids);
               request.getRequestDispatcher("/Movielist.jsp").forward(request, response);
 
             }
@@ -112,9 +119,6 @@ public class BroswerController extends HttpServlet
                             ex.getMessage()+"</P></BODY></HTML>");
                 return;
             }
-
-
-
          out.close();
          
     }
@@ -124,15 +128,14 @@ public class BroswerController extends HttpServlet
     {
 
        doGet(request, response);
-       
-
     }
 
-   public static ArrayList<Integer> GetMovieIDsByTitleFirstChar(String title_first_char,Statement action1) throws Exception
+  public static ArrayList<Integer> GetMovieIDsByTitleFirstChar(String title_first_char,Statement action1) throws Exception
   {
     ArrayList<Integer> movie_ids = new ArrayList();
-    
-    ResultSet result = action1.executeQuery("SELECT id FROM movies WHERE title LIKE'"+title_first_char+"%';");
+    String sql = "SELECT id FROM movies WHERE title LIKE'"+title_first_char+"%';";
+
+    ResultSet result = action1.executeQuery(sql);
     while(result.next())
     {
       movie_ids.add(result.getInt(1));
@@ -143,20 +146,18 @@ public class BroswerController extends HttpServlet
   }
 
 
-    public static ArrayList<Integer> GetMovieIDsByYear(int year) throws Exception
-    {
-      ArrayList<Integer> movie_ids = new ArrayList<Integer>();
+  public static ArrayList<Integer> GetMovieIDsByGenre(String genre, Statement action1) throws Exception
+  {
+    ArrayList<Integer> movie_ids = new ArrayList<Integer>();
       
-      ResultSet result = action1.executeQuery("SELECT id FROM movies WHERE year="+year+";");
-      while(result.next())
-      {
-        movie_ids.add(result.getInt(1));
-      }
-      result.close();
-      
-      return movie_ids;
-    }
-    
- 
+    String sql = "SELECT genres_in_movies.id FROM genres_in_movies WHERE genres_in_movies.genre_id=(SELECT genres.id FROM genres WHERE genres.name='"+genre+"');";
 
-  }
+    ResultSet result = action1.executeQuery(sql);
+    while(result.next())
+    {
+      movie_ids.add(result.getInt(1));
+    }      result.close();
+      
+    return movie_ids;
+    }
+}

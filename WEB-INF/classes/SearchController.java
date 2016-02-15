@@ -31,7 +31,6 @@ public class SearchController extends HttpServlet
         throws IOException, ServletException
     {
 
-
         String loginUser = "root";
         String loginPasswd = "";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
@@ -47,11 +46,13 @@ public class SearchController extends HttpServlet
            {
               //Class.forName("org.gjt.mm.mysql.Driver");
               Class.forName("com.mysql.jdbc.Driver").newInstance();
-                out.println("<HTML>" +
+              /*
+              out.println("<HTML>" +
                             "<HEAD><TITLE>" +
                             "MovieDB: Error" +
                             "</TITLE></HEAD>\n<BODY>" +
                             "<P>SQL error in doGet: ");
+              */
               Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
               // Declare our statement
               Statement action1 = dbcon.createStatement();
@@ -62,6 +63,7 @@ public class SearchController extends HttpServlet
               String director = request.getParameter("director");
               String starFN = request.getParameter("starFN");
               String starLN = request.getParameter("starLN");
+/*
               String sql = null;
               if(year=="")
               {
@@ -90,17 +92,20 @@ public class SearchController extends HttpServlet
                 movie_ids.add(result1.getInt(1));
               }
               result1.close();
+*/              
               
-              
+              ArrayList<Integer> movie_ids = new ArrayList();
+              movie_ids = GetMovieIDsByCombination(title, year, director, starFN, starLN, action1);
 
               action1.close();
               dbcon.close();
+              
               session.setAttribute("PageNo", 0);
               session.setAttribute("display", 10);
               session.setAttribute("Movielist", movie_ids);
               response.sendRedirect("/fabflix/Movielist.jsp");
-
             }
+
         catch (SQLException ex) {
               while (ex != null) {
                     System.out.println ("SQL Exception:  " + ex.getMessage ());
@@ -118,22 +123,47 @@ public class SearchController extends HttpServlet
                             ex.getMessage() + "</P></BODY></HTML>");
                 return;
             }
-
-
-
          out.close();
-         
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException
     {
-
        doGet(request, response);
-       
-
     }
 
+    public static ArrayList<Integer> GetMovieIDsByCombination(String title, String year, String director, String starFN, String starLN,Statement action1) throws Exception
+    {
+      ArrayList<Integer> movie_ids = new ArrayList();
+ 
+      String sql = null;
+      if(year=="")
+      {
+        sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+            + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+            + "WHERE movies.title LIKE '%"+title+"%' AND movies.director LIKE '%"+director+"%' "
+                + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
+      }
+      else
+      {
+        sql = "SELECT movies.id "
+            + "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+            + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+            + "WHERE movies.title LIKE '%"+title+"%' AND movies.year="+year+" AND movies.director LIKE '%"+director+"%' "
+                + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
+      }
+
+      ResultSet result1 = action1.executeQuery(sql);
+      while(result1.next())
+      {
+        movie_ids.add(result1.getInt(1));
+      }
+      result1.close();
+      
+      return movie_ids;
+    }
+
+/*
     public static ArrayList<Integer> GetMovieIDsByTitle(String title, Statement action1) throws Exception
     {
       ArrayList<Integer> movie_ids = new ArrayList<>();
@@ -175,27 +205,11 @@ public class SearchController extends HttpServlet
       
       return movie_ids;
     }
+*/
 
-    public static ArrayList<Integer> GetMovieIDsByCombination(String title, String year, String director, String starFN, String starLN,Statement action1) throws Exception
-    {
-      ArrayList<Integer> movie_ids = new ArrayList();
-      String sql = "SELECT movies.id "
-          + "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-          + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-          + "WHERE movies.title LIKE '%"+title+"%' AND movies.year="+year+" AND movies.director LIKE '%"+director+"%' "
-              + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
-      
 
-      ResultSet result1 = action1.executeQuery(sql);
-      while(result1.next())
-      {
-        movie_ids.add(result1.getInt(1));
-      }
-      result1.close();
-      
-      return movie_ids;
-    }
-    
+
+/*    
     public static ArrayList<Integer> GetMovieIDsByStarsFirstName(String firstname) throws Exception
     {
       ArrayList<Integer> movie_ids = new ArrayList();
@@ -215,5 +229,5 @@ public class SearchController extends HttpServlet
       
       return movie_ids;
     }
-
-  }
+*/
+}
