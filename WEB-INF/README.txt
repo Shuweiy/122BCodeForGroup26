@@ -13,4 +13,5 @@ $ sudo javac -classpath .:/YOUR_DIRECTORY/fabflix/WEB-INF/lib/servlet-api.jar /Y
 2) Run the following command: 
 $ sudo jar -cvf fabflix.war *
 3) Now you will find a fabflix.war file inside the fabflix folder. Move it to /YOUR_DIRECTORY/webapps folder. 
-4. Deploy fabflix.war from Tomcat Application Manager page. 
+
+3. Deploy fabflix.war from Tomcat Application Manager page. 
