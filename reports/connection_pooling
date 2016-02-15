@@ -1,0 +1,2 @@
+We use the JDBC connection pooling in /fabflix/META-INF/context.xml to configure Apache Tomcat webserver. 
+The context.xml file concludes information about the database, user name, password, and pooling configuration.

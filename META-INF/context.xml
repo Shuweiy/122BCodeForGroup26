@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <Context path="/fabflix">
+=======
+<Context path="/TomcatTest">
+>>>>>>> 4070c9181e8e2508277ecf61dcb6c5e24c5e3606
   
  <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"
