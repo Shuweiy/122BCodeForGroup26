@@ -19,13 +19,14 @@ public class ShoppingController extends HttpServlet {
       request.getRequestDispatcher("/ShoppingCart.jsp").forward(request, response);
       return;  
     }
+
       if(action.equals("remove")){
         String item_id = request.getParameter("item_id");
         previousItems.remove(item_id);
         session.setAttribute("previousItems", previousItems);
         request.getRequestDispatcher("/ShoppingCart.jsp").forward(request, response);
 	return;      
-}
+  }
      } 
     synchronized(session) {
       if (previousItems == null) {

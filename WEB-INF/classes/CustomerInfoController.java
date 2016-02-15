@@ -45,6 +45,21 @@ public class CustomerInfoController extends HttpServlet
 
 
         if(action.equals("login")){
+
+          String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+          System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+          // Verify CAPTCHA.
+          boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+          if (!valid) {
+          //errorString = "Captcha invalid!";
+                  out.println("<HTML>" +
+                  "<HEAD><TITLE>" +
+                  "MovieDB: Error" +
+                  "</TITLE></HEAD>\n<BODY>" +
+                  "<P>Recaptcha WRONG!!!! </P></BODY></HTML>");
+                  return;
+              }
+
           try{
 
              String email = request.getParameter("email");

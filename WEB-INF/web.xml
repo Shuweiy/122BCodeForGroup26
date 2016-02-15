@@ -53,6 +53,10 @@
   <servlet> 
     <servlet-name>CustomerInfoControllerServlet</servlet-name>
     <servlet-class>CustomerInfoController</servlet-class>
+  </servlet> 
+  <servlet> 
+    <servlet-name>EmployeeControllerServlet</servlet-name>
+    <servlet-class>EmployeeController</servlet-class>
   </servlet>  
 
   <servlet-mapping>
@@ -78,6 +82,10 @@
   <servlet-mapping>  
     <servlet-name>ShoppingControllerServlet</servlet-name>
     <url-pattern>/servlet/Shopping</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>  
+    <servlet-name>EmployeeControllerServlet</servlet-name>
+    <url-pattern>/servlet/employee</url-pattern>
   </servlet-mapping>
 
 

@@ -27,6 +27,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 
@@ -85,6 +86,8 @@
                         <label for="exampleInputPassword1">password</label>
                         <input name = "password" type="password" class="form-control col-md-offset-4" id="exampleInputPassword1" placeholder="Password" style = "width:36%">
                       </div>
+                      <div class="g-recaptcha" data-sitekey="[6Lf7KRgTAAAAAG5gvcwbXObS864LWlN289K5fLfH]" style = "text-align:-webkit-center"></div>
+
                       <button type="submit" class="btn btn-default">Submit</button>
                     </form>
 
