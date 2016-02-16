@@ -62,6 +62,10 @@
     <servlet-name>DashboardControllerServlet</servlet-name>
     <servlet-class>DashboardController</servlet-class>
   </servlet> 
+  <servlet>
+    <servlet-name>_dashboardJSP</servlet-name>
+    <jsp-file>/_dashboard.jsp</jsp-file>
+</servlet>
 
   <servlet-mapping>
     <servlet-name>PageControllerServlet</servlet-name>
@@ -95,8 +99,9 @@
     <servlet-name>DashboardControllerServlet</servlet-name>
     <url-pattern>/servlet/Dahsboard</url-pattern>
   </servlet-mapping>
-
-
-
+  <servlet-mapping>
+    <servlet-name>_dashboardJSP</servlet-name>
+    <url-pattern>/_dashboard</url-pattern>
+</servlet-mapping>
 
 </web-app>
