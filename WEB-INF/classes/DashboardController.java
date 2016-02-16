@@ -20,6 +20,7 @@ public class DashboardController extends HttpServlet
     private static Statement action2;
     private static Statement action3;
     private ArrayList<Integer> movieL;
+    private String Notification;
 
     public String getServletInfo()
     {
@@ -70,9 +71,9 @@ public class DashboardController extends HttpServlet
               String banner_url = request.getParameter("banner_url");
               String first_name = request.getParameter("first_name");
               String genre = request.getParameter("genre");
+              String trailer_url = request.getParameter("trailer_url");
 
 
-              String Notification = ""; 
               if(action.equals("addstar"))
               {
                 
@@ -102,18 +103,33 @@ public class DashboardController extends HttpServlet
 
               if(action.equals("addmovie"))
               {
-                   CALL add_movies
-                  (
-                    title   ,
-                    year   ,
-                    director   ,
-                    banner_url   ,
-                    trailer_url   ,
-                    first_name   ,
-                    last_name
+                CallableStatement callableStatement =
+                dbcon.prepareCall("{call add_movies(?, ?, ?, ?, ?, ?, ? ,?)}");
+                callableStatement.setString(1, title);
+                callableStatement.setInt(2, Integer.parseInt(year));
+                callableStatement.setString(3, director);
 
-                  );
-                GO   
+                callableStatement.setString(4, banner_url);
+                callableStatement.setString(5, trailer_url);
+                callableStatement.setString(6, first_name);
+                callableStatement.setString(7, last_name);
+                callableStatement.setString(8, genre);
+                callableStatement.executeUpdate();
+
+               
+
+
+                Notification = "nothing happened";
+
+                ResultSet result = callableStatement.getResultSet();
+
+
+                Notification = "movie insert successfully";
+                  
+                callableStatement.close();
+                dbcon.close();
+                session.setAttribute("Notification", Notification);
+                response.sendRedirect("/fabflix/AddMovie.jsp");
               }                  
 
 
@@ -128,13 +144,9 @@ public class DashboardController extends HttpServlet
 
         catch(java.lang.Exception ex)
             {
-                out.println("<HTML>" +
-                            "<HEAD><TITLE>" +
-                            "MovieDB: Error" +
-                            "</TITLE></HEAD>\n<BODY>" +
-                            "<P>SQL error in doGethere: " +
-                            ex.getMessage()+"</P></BODY></HTML>");
-                return;
+                Notification = "failed inser movie";
+                session.setAttribute("Notification", Notification);
+                response.sendRedirect("/fabflix/AddMovie.jsp");
             }
 
 

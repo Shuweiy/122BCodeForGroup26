@@ -39,10 +39,10 @@ public class SearchController extends HttpServlet
         response.setContentType("text/html");    // Response mime type
 
         // Output stream to STDOUT
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        ArrayList previousItems = (ArrayList)session.getAttribute("previousItems");
-        
+
+        PrintWriter out = response.getWriter();
+
         try
            {
               //Class.forName("org.gjt.mm.mysql.Driver");
@@ -50,11 +50,12 @@ public class SearchController extends HttpServlet
      
               Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
               // Declare our statement
-              String sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-                + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-                + "WHERE movies.title LIKE '%?%' AND movies.director LIKE '%?%' "
-                + "AND stars.first_name LIKE '%?%' AND stars.last_name LIKE '%?%'";
-              PreparedStatement action1 = dbcon.prepareStatement(sql);
+              // String sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+              //   + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+              //   + "WHERE movies.title LIKE '%?%' AND movies.director LIKE '%?%' "
+              //   + "AND stars.first_name LIKE '%?%' AND stars.last_name LIKE '%?%'";
+
+          
 
               String input = request.getParameter("input");
               String title = request.getParameter("title");
@@ -62,50 +63,30 @@ public class SearchController extends HttpServlet
               String director = request.getParameter("director");
               String starFN = request.getParameter("starFN");
               String starLN = request.getParameter("starLN");
+              String sql = "select id from movies where title like '%"+title+"%';";
+              PreparedStatement pstmt = dbcon.prepareStatement(sql);
 
-              action1.setString(1,title);
-              action1.setString(2,director);
-              action1.setString(3,starFN);
-              action1.setString(4,starLN);
-              
+              pstmt.execute();
 
-
-            //   if(year=="")
-            //   {
-            //    sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-            // + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-            // + "WHERE movies.title LIKE '%"+title+"%' AND movies.director LIKE '%"+director+"%' "
-            //     + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
-
-            //   }
-            //   else
-            //   {
-            //      sql = "SELECT movies.id "
-            // + "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-            // + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-            // + "WHERE movies.title LIKE '%"+title+"%' AND movies.year="+year+" AND movies.director LIKE '%"+director+"%' "
-            //     + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
-
-            //   }
-            
 
               ArrayList<Integer> movie_ids = new ArrayList();
-
-              ResultSet result1 = action1.executeQuery();
+              ResultSet result1 = pstmt.getResultSet();
               while(result1.next())
               {
                 movie_ids.add(result1.getInt(1));
               }
               result1.close();
-              
-              
+            
 
-              action1.close();
+
+              
+              pstmt.close();
               dbcon.close();
               session.setAttribute("PageNo", 0);
               session.setAttribute("display", 10);
               session.setAttribute("Movielist", movie_ids);
               response.sendRedirect("/fabflix/Movielist.jsp");
+              return;
 
             }
         catch (SQLException ex) {

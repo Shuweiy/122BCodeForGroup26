@@ -258,6 +258,14 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+             <% 
+            String Notification = (String) session.getAttribute("Notification");
+            if(Notification != null){
+                out.write("<div class='alert alert-success' style = 'position: absolute;width: 100%;'>");
+                out.write (Notification);
+                out.write("</div>");
+            }
+            %>
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -301,7 +309,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Insert Star</h1>
+                    <h1 class="page-header">Insert Movie</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -315,19 +323,41 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                     <form role="form">
-                                        <div class="form-group">
-                                            <label>Movie Titile</label>
-                                            <input class="form-control">
+                                     <form action = "/fabflix/servlet/Dahsboard?action=addmovie" method= "POST">
+                                          <div class="form-group">
+                                            <label>Title (Required)</label>
+                                            <input name = "title" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>Director</label>
-                                            <input class="form-control">
+                                            <label>Year (Required)</label>
+                                            <input name = "year" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>Year</label>
-                                            <input type = "number" class="form-control">
+                                            <label>Director (Required)</label>
+                                            <input name = "director" class="form-control">
                                         </div>
+                                        <div class="form-group">
+                                            <label>Star's first Name (Required)</label>
+                                            <input name = "first_name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Star's last Name (Required)</label>
+                                            <input name = "last_name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Genre (Required)</label>
+                                            <input name = "genre" class="form-control">
+                                        </div>      
+                                        <div class="form-group">
+                                            <label>Banner URL (Optional)</label>
+                                            <input name = "banner_url" class="form-control">
+                                        </div>                                       
+                                        <div class="form-group">
+                                            <label>Trailer URL (Optional)</label>
+                                            <input name = "trailer_url" class="form-control">
+                                        </div>                                                                        
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
                                        
                                         <button type="submit" class="btn btn-default">Submit</button>
                                     </form>
