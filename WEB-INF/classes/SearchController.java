@@ -47,14 +47,14 @@ public class SearchController extends HttpServlet
            {
               //Class.forName("org.gjt.mm.mysql.Driver");
               Class.forName("com.mysql.jdbc.Driver").newInstance();
-                out.println("<HTML>" +
-                            "<HEAD><TITLE>" +
-                            "MovieDB: Error" +
-                            "</TITLE></HEAD>\n<BODY>" +
-                            "<P>SQL error in doGet: ");
+     
               Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
               // Declare our statement
-              Statement action1 = dbcon.createStatement();
+              String sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+                + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+                + "WHERE movies.title LIKE '%?%' AND movies.director LIKE '%?%' "
+                + "AND stars.first_name LIKE '%?%' AND stars.last_name LIKE '%?%'";
+              PreparedStatement action1 = dbcon.prepareStatement(sql);
 
               String input = request.getParameter("input");
               String title = request.getParameter("title");
@@ -62,29 +62,36 @@ public class SearchController extends HttpServlet
               String director = request.getParameter("director");
               String starFN = request.getParameter("starFN");
               String starLN = request.getParameter("starLN");
-              String sql = null;
-              if(year=="")
-              {
-               sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-            + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-            + "WHERE movies.title LIKE '%"+title+"%' AND movies.director LIKE '%"+director+"%' "
-                + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
 
-              }
-              else
-              {
-                 sql = "SELECT movies.id "
-            + "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-            + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-            + "WHERE movies.title LIKE '%"+title+"%' AND movies.year="+year+" AND movies.director LIKE '%"+director+"%' "
-                + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
+              action1.setString(1,title);
+              action1.setString(2,director);
+              action1.setString(3,starFN);
+              action1.setString(4,starLN);
+              
 
-              }
+
+            //   if(year=="")
+            //   {
+            //    sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+            // + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+            // + "WHERE movies.title LIKE '%"+title+"%' AND movies.director LIKE '%"+director+"%' "
+            //     + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
+
+            //   }
+            //   else
+            //   {
+            //      sql = "SELECT movies.id "
+            // + "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+            // + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+            // + "WHERE movies.title LIKE '%"+title+"%' AND movies.year="+year+" AND movies.director LIKE '%"+director+"%' "
+            //     + "AND stars.first_name LIKE '%"+starFN+"%' AND stars.last_name LIKE '%"+starLN+"%'";
+
+            //   }
             
 
               ArrayList<Integer> movie_ids = new ArrayList();
 
-              ResultSet result1 = action1.executeQuery(sql);
+              ResultSet result1 = action1.executeQuery();
               while(result1.next())
               {
                 movie_ids.add(result1.getInt(1));

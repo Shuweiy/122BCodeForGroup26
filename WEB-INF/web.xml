@@ -58,6 +58,10 @@
     <servlet-name>EmployeeControllerServlet</servlet-name>
     <servlet-class>EmployeeController</servlet-class>
   </servlet>  
+    <servlet> 
+    <servlet-name>DashboardControllerServlet</servlet-name>
+    <servlet-class>DashboardController</servlet-class>
+  </servlet> 
 
   <servlet-mapping>
     <servlet-name>PageControllerServlet</servlet-name>
@@ -86,6 +90,10 @@
     <servlet-mapping>  
     <servlet-name>EmployeeControllerServlet</servlet-name>
     <url-pattern>/servlet/employee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>  
+    <servlet-name>DashboardControllerServlet</servlet-name>
+    <url-pattern>/servlet/Dahsboard</url-pattern>
   </servlet-mapping>
 
 
