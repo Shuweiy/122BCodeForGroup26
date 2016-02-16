@@ -62,19 +62,35 @@ public class DashboardController extends HttpServlet
               String input = request.getParameter("input");
               String action = request.getParameter("action");
 
-              String first_name = request.getParameter("first_name");
               String last_name = request.getParameter("last_name");
+
+              String title = request.getParameter("title");
+              String year = request.getParameter("year");
+              String director = request.getParameter("director");
+              String banner_url = request.getParameter("banner_url");
+              String first_name = request.getParameter("first_name");
+              String genre = request.getParameter("genre");
+
 
               String Notification = ""; 
               if(action.equals("addstar"))
               {
                 
+                if(last_name.equals("")){
+
+                  Notification = "Star insert failed because last name is empty";
+
+                  session.setAttribute("Notification", Notification);
+                  response.sendRedirect("/fabflix/InsertStar.jsp"); 
+                  return;
+
+                }
 
                 String sql = "INSERT INTO stars(first_name, last_name) VALUES('"+first_name+"', '"+last_name+"');";
 
                 action1.executeUpdate(sql);
 
-                Notification = "Start insert successfully";
+                Notification = "Star insert successfully";
 
                 action1.close();
                 dbcon.close();
@@ -86,36 +102,19 @@ public class DashboardController extends HttpServlet
 
               if(action.equals("addmovie"))
               {
-                      int count = 0;
-                      ResultSet result = action.executeQuery(parResult.ShowTables());
-                      while(result.next())
-                      {
-                        count += 1;
-                        ResultSet re = action2.executeQuery("Select * from "+ result.getString(1)+";");
-                        
-                        ResultSetMetaData metadata = re.getMetaData();
-                        System.out.println("There are " + metadata.getColumnCount() + " columns in table " + result.getString(1));
-                        for (int i = 1; i <= metadata.getColumnCount(); i++)
-                        {
-                          out.write("Name of column " + i + " is " + metadata.getColumnName(i));
-                          out.write("Type of column "+ i + " is " + metadata.getColumnTypeName(i));
-                        }
-                        re.close();
-                      }
-                      System.out.println(count + " tables printed in total");
-                      result.close();
-                      return;
-              }
+                   CALL add_movies
+                  (
+                    title   ,
+                    year   ,
+                    director   ,
+                    banner_url   ,
+                    trailer_url   ,
+                    first_name   ,
+                    last_name
 
-              if(action.equals("metadata"))
-              {
-                  String sql = "INSERT INTO stars(first_name, last_name) VALUES('"+first_name+"', '"+last_name+"');";
-
-
-              }
-              
-              
-
+                  );
+                GO   
+              }                  
 
 
             }

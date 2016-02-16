@@ -73,10 +73,10 @@ public class EmployeeController extends HttpServlet
               Statement action1 = dbcon.createStatement();
               Statement action2 = dbcon.createStatement();
 
-                String sqlEmailExist = "SELECT EXISTS(SELECT * FROM employees WHERE email='"+email+"');";
+              String sqlEmailExist = "SELECT EXISTS(SELECT * FROM employees WHERE email='"+email+"');";
 
 
-                  ResultSet result = action1.executeQuery(sqlEmailExist);
+              ResultSet result = action1.executeQuery(sqlEmailExist);
 
        
 
@@ -87,7 +87,7 @@ public class EmployeeController extends HttpServlet
                     {
                 
                       result.close();
-                      response.sendRedirect("/fabflix/EmployeeController.jsp"); 
+                      response.sendRedirect("/fabflix/Metadata.jsp"); 
                     }
                     else
                     {

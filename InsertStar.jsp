@@ -258,6 +258,15 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+            
+            <% 
+            String Notification = (String) session.getAttribute("Notification");
+            if(Notification != null){
+                out.write("<div class='alert alert-success' style = 'position: absolute;width: 100%;'>");
+                out.write (Notification);
+                out.write("</div>");
+            }
+            %>
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -275,17 +284,17 @@
                         </li>
     
                         <li>
-                            <a href="Metadata.html"><i class="fa fa-table fa-fw"></i>Show Metadata</a>
+                            <a href="/fabflix/Metadata.jsp"><i class="fa fa-table fa-fw"></i>Show Metadata</a>
                         </li>                        
                 
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Modify Database <span class="fa arrow"></span></a>
+                            <a href="/fabflix/Metadata.jsp"><i class="fa fa-edit fa-fw"></i> Modify Database <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="InsertStar.html">Insert Star</a>
+                                    <a href="/fabflix/InsertStar.jsp">Insert Star</a>
                                 </li>
                                 <li>
-                                    <a href="AddMovie.html">Add Movie</a>
+                                    <a href="/fabflix/AddMovie.jsp">Add Movie</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -296,6 +305,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
 
         <div id="page-wrapper">
             <div class="row">

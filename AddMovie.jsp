@@ -275,7 +275,7 @@
                         </li>
     
                         <li>
-                            <a href="Metadata.html"><i class="fa fa-table fa-fw"></i>Show Metadata</a>
+                            <a href="/fabflix/Metadata.jsp"><i class="fa fa-table fa-fw"></i>Show Metadata</a>
                         </li>
                     
                 
@@ -283,10 +283,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Modify Database <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="InsertStar.html">Insert Star</a>
+                                    <a href="/fabflix/InsertStar.jsp">Insert Star</a>
                                 </li>
                                 <li>
-                                    <a href="AddMovie.html">Add Movie</a>
+                                    <a href="/fabflix/AddMovie.jsp">Add Movie</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
