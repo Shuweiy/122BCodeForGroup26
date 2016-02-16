@@ -62,17 +62,11 @@ public class BroswerController extends HttpServlet
               
             
               
-              ArrayList<Integer> movie_ids = new ArrayList();
 
                if(input.length()>1){
 
-               ResultSet result = action1.executeQuery("SELECT id FROM movies WHERE title LIKE'"+input+"%';");
-                while(result.next())
-                {
-                  movie_ids.add(result.getInt(1));
-                }
-                result.close();
-                movieL = movie_ids;              
+                  movieL = GetMovieIDsByGenre(input,action1);
+                  
               }
 
 
@@ -156,7 +150,23 @@ public class BroswerController extends HttpServlet
       
       return movie_ids;
     }
+
+
+  public static ArrayList<Integer> GetMovieIDsByGenre(String genre, Statement action1) throws Exception
+  {
+    ArrayList<Integer> movie_ids = new ArrayList<Integer>();
+      
+    String sql = "SELECT genres_in_movies.movie_id FROM genres_in_movies WHERE genres_in_movies.genre_id=(SELECT genres.id FROM genres WHERE genres.name='"+genre+"');";
+
+    ResultSet result = action1.executeQuery(sql);
+    while(result.next())
+    {
+      movie_ids.add(result.getInt(1));
+    }      result.close();
+      
+    return movie_ids;
+    }
+}
     
  
 
-  }
