@@ -44,7 +44,7 @@ public class CustomerInfoController extends HttpServlet
 
 
 
-        if(action.equals("login")){
+        if(action != null && action.equals("login")){
 
           String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
           System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
@@ -192,9 +192,9 @@ public class CustomerInfoController extends HttpServlet
                   ArrayList<String> previousItems = (ArrayList<String>)session.getAttribute("previousItems");
 
                   for (String movie_id : previousItems){
-                    String Salesql = "INSERT INTO sales(customer_id, movie_id, sale_date) VALUES("+customer_id+", "+movie_id+", '"+sale_date+"');";
-                    Statement select = dbcon.createStatement();
-                  select.executeUpdate(Salesql);
+                    String Salesql = "INSERT INTO sales(customer_id, movie_id, dale_date) VALUES("+customer_id+", "+movie_id+", '"+sale_date+"');";
+                  
+                  action2.executeUpdate(Salesql);
                   request.getRequestDispatcher("/succeed.html").forward(request, response);
 
                   }

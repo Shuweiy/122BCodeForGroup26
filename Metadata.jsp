@@ -87,7 +87,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Metadata</a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Metadata</a>
                         </li>
 
                         

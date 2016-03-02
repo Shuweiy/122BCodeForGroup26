@@ -20,7 +20,7 @@
  
 
 <center>
-<form action="/TomcatForm/servlet/customer" method = "POST">
+<form action="/fabflix/servlet/customer" method = "POST">
   First Name: <input type="text" name="firstname"><br>
   Last Name: <input type="text" name="lasrname"><br>
   Card Number: <input type="number" name="cardnumber"><br>

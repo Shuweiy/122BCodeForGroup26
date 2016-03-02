@@ -50,11 +50,11 @@ public class SearchController extends HttpServlet
      
               Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
               // Declare our statement
-              // String sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
-              //   + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
-              //   + "WHERE movies.title LIKE '%?%' AND movies.director LIKE '%?%' "
-              //   + "AND stars.first_name LIKE '%?%' AND stars.last_name LIKE '%?%'";
-
+              String sql = "SELECT movies.id "+ "FROM (stars_in_movies INNER JOIN stars ON stars_in_movies.star_id=stars.id) "
+                + "INNER JOIN movies ON stars_in_movies.movie_id=movies.id "
+                + "WHERE movies.title LIKE ? AND movies.director LIKE ? "
+                + "AND stars.first_name LIKE ? AND stars.last_name LIKE ? ";
+              PreparedStatement pstmt = dbcon.prepareStatement(sql);
           
 
               String input = request.getParameter("input");
@@ -63,8 +63,14 @@ public class SearchController extends HttpServlet
               String director = request.getParameter("director");
               String starFN = request.getParameter("starFN");
               String starLN = request.getParameter("starLN");
-              String sql = "select id from movies where title like '%"+title+"%';";
-              PreparedStatement pstmt = dbcon.prepareStatement(sql);
+            
+              pstmt.setString(1,"%"+title+"%");
+              pstmt.setString(2,"%"+director+"%");
+              pstmt.setString(3,"%"+starFN+"%");
+              pstmt.setString(4,"%"+starLN+"%");
+
+
+
 
               pstmt.execute();
 
